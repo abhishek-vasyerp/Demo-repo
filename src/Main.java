@@ -10,18 +10,28 @@ public class Main {
         String url="jdbc:postgresql://localhost:5432/Demo";
         String username="postgres";
         String password="postgres";
-        String sql = "select sname from student where sid= 1";
+        String sql = "select * from student";
         Class.forName("org.postgresql.Driver");
         Connection con= getConnection(url,username,password);
         Statement st=con.createStatement();
         System.out.println("Connection Established");
         st.executeQuery(sql);
         ResultSet rs = st.executeQuery(sql);
-        rs.next();
-        String name = rs.getString("sname");
-        System.out.println("Name is " + name);
-       // System.out.println(rs.next());
-        con.close();
+//        rs.next();
+//        String name = rs.getString("sname");
+//        System.out.println("Name is " + name);
+// System.out.println(rs.next());
+        while(rs.next())
+        {
+            System.out.print(rs.getInt(1)+ " -");
+            System.out.print(rs.getString(2)+ " -");
+            System.out.println(rs.getInt(3));
+
+        }
+
         System.out.println("Connection closed");
+        con.close();
+
+
     }
 }
